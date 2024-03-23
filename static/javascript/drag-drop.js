@@ -1188,6 +1188,29 @@ $(document).ready(function (e) {
 
   window.addEventListener("DOMContentLoaded", (event) => {
     (function () {
+
+
+      document.addEventListener("dblclick", function(e) {
+        // Check if the clicked target is a component name or a page item
+        if (e.target.classList.contains("component-name") || e.target.classList.contains("page-item")) {
+          // Make the target content editable and focus on it for immediate editing
+          e.target.contentEditable = true;
+          e.target.focus();
+    
+          // Add a one-time event listener for blur to handle when the editing is finished
+          e.target.addEventListener("blur", function handler() {
+            // Assuming the logic to determine and update the correct element goes here
+            // Example: Update the element's innerHTML with the new text
+            e.target.innerText = e.target.innerText; // Simplified; adapt as needed
+    
+            // Disable contentEditable
+            e.target.contentEditable = false;
+            // Remove this blur event listener after it's executed
+            e.target.removeEventListener("blur", handler);
+          }, {once: true}); // The listener is removed after execution thanks to {once: true}
+        }
+      });
+
       document.addEventListener("dragstart", dragStartHandler, false);
       document.addEventListener("dragend", dragEndHandler, false);
       document.addEventListener("drop", dropHandler, false);
@@ -1386,25 +1409,28 @@ $(document).ready(function (e) {
       }
 
       document.addEventListener("keydown", function (event) {
-        const key = event.key;
-        const currentTime = Date.now();
-        const targetTagName = event.target.tagName.toLowerCase();
+const key = event.key;
+const currentTime = Date.now();
+const target = event.target; // Directly work with the event target
+const targetTagName = target.tagName.toLowerCase();
+const isContentEditable = target.isContentEditable; // Check if the target is contentEditable
 
-        // Check if the pressed key is backspace and the focus is not on input/textarea
-        if (
-          key === "Backspace" &&
-          !["input", "textarea"].includes(targetTagName)
-        ) {
-          // Check if the current press is within the threshold of the last press
-          if (currentTime - lastBackspaceTime <= doubleBackspaceThreshold) {
-            // Prevent the default backspace action
-            event.preventDefault();
-            // Handle the double backspace action
-            handleDoubleBackspaceAction();
-          }
-          // Update the lastBackspaceTime to the current time
-          lastBackspaceTime = currentTime;
-        }
+// Check if the pressed key is backspace and the focus is not on input/textarea, and also not on a contentEditable element
+if (
+  key === "Backspace" &&
+  !["input", "textarea"].includes(targetTagName) &&
+  !isContentEditable // Ensure it's not a contentEditable element
+) {
+  // Check if the current press is within the threshold of the last press
+  if (currentTime - lastBackspaceTime <= doubleBackspaceThreshold) {
+    // Prevent the default backspace action
+    event.preventDefault();
+    // Handle the double backspace action
+    handleDoubleBackspaceAction();
+  }
+  // Update the lastBackspaceTime to the current time
+  lastBackspaceTime = currentTime;
+}
 
       
       
@@ -2077,6 +2103,7 @@ $(document).ready(function (e) {
           });
           dragonedComponentsList.push(instance); // Add the instance to the list
         });
+      
       function instantiateAndAddToDragonedList(element) {
         let instance = new Dragoned_Component(element, {
           sort: false,
@@ -2086,6 +2113,14 @@ $(document).ready(function (e) {
         dragonedComponentsList.push(instance);
       }
 
+      
+      // Double-click to rename component
+      dragonedComponentsList.addEventListener("dblclick", function (e) {
+        if (e.target.classList.contains("component-name")) {
+          e.target.contentEditable = true;
+          e.target.focus();
+        }
+      });
 
         
     })();

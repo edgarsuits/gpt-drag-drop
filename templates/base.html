@@ -132,9 +132,9 @@
 
                             <div class="text-end">
                                 {% if(request.url_rule.rule == "/tutor_builder") %}
-                                <button type="button" class="btn btn-outline-light me-2" id="btn_myProfile">My Profile</button>
+                                <button type="button" class="btn btn-outline-light me-2" id="btn_myProfile">Settings</button>
                                 {% else %}
-                                <a href="{{ url_for('profile') }}"><button type="button" class="btn btn-outline-light me-2">My Profile</button></a>
+                                <a href="{{ url_for('profile') }}"><button type="button" class="btn btn-outline-light me-2">Settings</button></a>
                                 {% endif %}
                             </div>
 
