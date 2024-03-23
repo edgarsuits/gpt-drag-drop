@@ -1,0 +1,25 @@
+{
+    "SECRET_KEY": "6439355f702141479e42d47ae4f7ae68",
+    "DATABASE_SETUP": {
+        "agents": {
+            "database_name": "database.db",
+            "query_filepath": "database_setup/agents.sql",
+            "on_startup": true
+        },
+        "tutors": {
+            "database_name": "database.db",
+            "query_filepath": "database_setup/tutors.sql",
+            "on_startup": true
+        },
+        "users": {
+            "database_name": "database.db",
+            "query_filepath": "database_setup/users.sql",
+            "on_startup": true
+        },
+        "logs": {
+            "database_name": "logs.db",
+            "query_filepath": "database_setup/logs.sql",
+            "on_startup": false
+        }
+    }
+}

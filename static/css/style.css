@@ -1,0 +1,958 @@
+math-field {
+  opacity: 1;
+}
+
+math-field.correct_field {
+  background-color: #e9ecef;
+}
+
+.correct_field {
+  background-color: #e9ecef;
+  color: green;
+  box-shadow: 0px 0px 2px green;
+}
+
+.incorrect_field {
+  box-shadow: 0px 0px 10px red;
+  color: red;
+}
+
+.hint_field {
+  box-shadow: 0px 0px 10px yellow !important;
+}
+
+input.incorrect_field {
+  box-shadow: 0px 0px 10px red;
+}
+
+#preview-tutor  .btn-column{
+  background: none !important;
+  border: none !important;
+}
+
+#preview-tutor  .btn-row-item{
+  background: none !important ;
+  border: none !important;
+}
+.flash {
+  width: 500px;
+  margin: 5px auto 5px auto;
+}
+
+/* Used in factor_xbox */
+.wrapper_small {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.wrapper_large {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+#container-consent {
+  margin: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.areabox input {
+  text-align: center;
+  width: 100%;
+  height: 90px;
+}
+
+.areabox div {
+  padding: 1px;
+}
+
+/* Drag and Drop */
+.draggable {
+  /*    width: 25%;*/
+  /*    min-height: 6.5em;*/
+  /*    margin: 1rem 0 0 1rem;*/
+  /*    background-color: #29e;*/
+  /*    color: white;*/
+  /*    border-radius: 0.75em;*/
+  /*    padding: 4%;*/
+  /*    touch-action: none;*/
+  /*    user-select: none;*/
+}
+
+#tutor-title {
+  width: 100%;
+  height: 150px;
+  background-color: #ffcd29;
+  border-radius: 8px;
+}
+
+#title-font {
+  font-size: 70px;
+  text-align: center;
+}
+
+div {
+  text-align: center;
+}
+
+.tutor-button-group {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  padding-left: 50px !important;
+  padding-right: 50px !important;
+  border-radius: 15px !important;
+  background-color: black !important;
+}
+
+.btn_group {
+  color: white !important;
+  font-size: 30px !important;
+}
+
+h5 {
+  color: white !important;
+  font-size: 20px !important;
+}
+
+.rounded-button {
+  border-radius: 20px !important;
+}
+
+.row {
+  --bs-gutter-x: -0 !important;
+}
+
+#btn_hint {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  background-color: #b3b3b3 !important;
+  color: black !important;
+  border: none !important;
+}
+
+.btn-tutor-title {
+  background-color: #ffa629 !important;
+  border: solid;
+  border-color: #b3b3b3 !important;
+  color: black !important;
+}
+
+.btn-initial-problem {
+  background-color: #aff4c6 !important;
+  border: solid;
+  border-color: #b3b3b3 !important;
+  color: black !important;
+}
+
+.btn-label {
+  background-color: #b3b3b3 !important;
+  border: solid;
+  border-color: #b3b3b3 !important;
+  color: black !important;
+}
+
+.btn-input-box-v {
+  background-color: #bde3ff !important;
+  border: solid;
+  border-color: #b3b3b3 !important;
+  color: black !important;
+}
+
+.btn-row {
+  background-color: #ffc7c2 !important;
+  border: solid;
+  border-color: #b3b3b3 !important;
+  color: black !important;
+}
+
+.btn-column {
+  background-color: #bde3ff !important;
+  border: solid;
+  border-color: #b3b3b3 !important;
+  color: black !important;
+}
+
+.btn-input-box-t {
+  background-color: white !important;
+  border: solid;
+  border-color: #b3b3b3 !important;
+  color: black !important;
+}
+
+.btn-spacer {
+  background-color: #bde3ff !important;
+  border: solid;
+  border-color: #b3b3b3 !important;
+  color: black !important;
+}
+
+.btn-details {
+  background-color: black !important;
+  /*    border: solid;
+    border-color: #b3b3b3!important;
+    color: black!important;*/
+}
+
+
+
+
+#page .btn-tutor-title {
+  width: 60%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 45px;
+}
+
+#page .btn-row {
+  width: 100% !important;
+  min-height: 100px;
+  /*    margin-top: 20px;*/
+  /*     height: 100%; */
+  /* height: fit-content; */
+  /* overflow: unset; */
+}
+
+.btn-row {
+  min-height: auto;
+}
+
+#page #page-item-ul-top .btn-input-box-t {
+}
+
+#page #page-item-ul-bottom .btn-input-box-t {
+}
+
+#page .btn-initial-problem {
+  margin-right: 5px;
+  margin-left: 5px;
+  /* width: 15%; 
+    height: 45px; */
+  display: flex !important;
+  align-items: center !important; /* Vertical center alignment */
+  justify-content: center;
+}
+
+#page .btn-label {
+  margin-right: 5px;
+  margin-left: 5px;
+  /* width: 15%;
+    height: 45px; */
+  display: flex !important;
+  align-items: center !important; /* Vertical center alignment */
+  justify-content: center;
+}
+
+#page .btn-input-box-t {
+  margin-right: 5px;
+  margin-left: 5px;
+  /* width: 15%;
+    height: 45px; */
+  display: flex !important;
+  align-items: center !important; /* Vertical center alignment */
+  justify-content: center;
+}
+
+#page .btn-input-box-v {
+  margin-right: 5px;
+  margin-left: 5px;
+  /* width: 15%;
+    height: 45px; */
+  display: flex !important;
+  align-items: center !important; /* Vertical center alignment */
+  justify-content: center;
+}
+
+#page .btn-column {
+  /*    margin-top: 20px;*/
+  padding-top: 15px;
+
+  width: 100%;
+  min-height: 150px;
+  padding-bottom: 15px;
+}
+.dummy {
+  border: 5px dashed #ffcd29;
+  margin-bottom: 20px; /* Space below the dummy for new content */
+}
+
+#page-container  {
+  min-height: 100%;
+}
+
+#page-container::after {
+  content: "";
+  display: block;
+  height: 80px; /* Adjust the value as needed */
+}
+.page-item-rl-row{
+  min-height: 100%;
+}
+
+#page .page-item-rl-row{
+  padding-top: 15px;
+
+  min-height: 150px;
+  padding-bottom: 15px;
+
+}
+#page .btn-row::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: 6px solid transparent;
+  border-radius: 20px;
+  background-clip: padding-box;
+}
+
+#page .btn-row::-webkit-scrollbar {
+  width: 20px;
+}
+
+#page .btn-column::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: 6px solid transparent;
+  border-radius: 20px;
+  background-clip: padding-box;
+}
+
+#page .btn-column::-webkit-scrollbar {
+  width: 20px;
+}
+
+#page_parent {
+  height: 60%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* This will push your label to the bottom */
+  position: relative; /* This ensures that the spinner is positioned relative to page_parent */
+
+}
+
+
+
+#page::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: 6px solid transparent;
+  border-radius: 20px;
+  background-clip: padding-box;
+}
+
+#page::-webkit-scrollbar {
+  width: 20px;
+}
+
+#page .removeFromDom {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.containe-fruits {
+  width: 150px;
+  height: 300px;
+  margin: 20px;
+  padding: 20px;
+  background: #f0f2f5;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.4);
+  color: #f5f5f5;
+  background: #c2185b;
+}
+
+.containe-electronics {
+  width: 150px;
+  height: 300px;
+  margin: 20px;
+  padding: 20px;
+  background: #f0f2f5;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.4);
+  color: #f5f5f5;
+  background: #607d8b;
+}
+
+.containe-bucket {
+  width: 150px;
+  height: 300px;
+  margin: 20px;
+  padding: 20px;
+  background: #f0f2f5;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.4);
+  color: #f5f5f5;
+  background: #0288d1;
+}
+
+.list {
+  list-style: none;
+  height: 75% !important;
+  /* min-height: 18vh; */
+}
+
+UL .btn-row .list {
+  height: 100% !important;
+  /*    height: 100%;*/
+  min-height: 3vh;
+  padding: 10px;
+}
+
+.list li {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+}
+
+
+
+.active {
+  background: #6a1b9a;
+}
+
+.clicked {
+  border-color: yellow !important;
+}
+
+.text-area {
+  width: 100%;
+  border: solid;
+  border-color: #f0f2f5 !important;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #b3b3b3;
+}
+
+#page-container #page-item-ul-top {
+  min-width: 50px;
+  min-height: 50px;
+  border: 1px dotted #607d8b;
+  border-radius: 5%;
+  margin-bottom: 4px;
+}
+
+#page-container #line {
+  display: flex !important;
+  width: 10 0% !important;
+  border: none;
+  background-color: gray;
+  height: 2px;
+  /* margin-left: -9px !important; */
+}
+
+#page-container #page-item-ul-bottom {
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 5%;
+  border: 1px dotted #607d8b;
+  margin-top: 4px;
+}
+
+#page-container #row-item {
+  height: 50px;
+}
+
+#line {
+  display: none;
+}
+
+.fractions-div {
+  display: block;
+  background-color: white !important;
+  border: solid;
+  border-color: #b3b3b3 !important;
+
+  /* justify-content: center; */
+}
+
+#page .page-item {
+  min-height: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* #page input {
+min-height: 25px;
+padding-left: 10px;
+padding-right: 10px;
+} */
+
+#page > .fractions-div .page-item {
+  min-height: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#tutor_body {
+  margin-top: 60px !important;
+}
+
+#page .page-item-ul {
+  /*    padding-top: 10px;
+    padding-bottom: 10px;*/
+  height: 100% !important;
+}
+
+#page {
+  padding: 10px;
+  height: 100%;
+}
+
+#page .btn-fractions {
+  background-color: none !important;
+  border: none !important;
+}
+
+.btn-fractions {
+  background-color: #b3b3b3;
+  border: solid;
+  border-color: #b3b3b3;
+  color: black;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#playground {
+  /* min-height: 1000px; */
+  
+  height: 1500px;
+}
+
+#modal-width {
+  width: 600px !important;
+}
+
+#content #tutor-list {
+  /* padding-right: 180px !important;
+  padding-left: 180px !important; */
+}
+
+#header_style {
+  /* padding-right: 180px !important;
+  padding-left: 180px !important; */
+}
+
+.black_color {
+  background-color: black !important;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+table td {
+  padding: 5px;
+}
+table thead th {
+  background-color: #54585d;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+  border-bottom: 1px solid #54585d;
+}
+table tbody td {
+  color: #636363;
+  border-bottom: 3px solid #dee2e6;
+  font-weight: bold;
+  font-size: 20px;
+}
+.tutor-designer-input:focus {
+  outline: none; /* Removes the default focus outline */
+  border: 1px solid #ced4da; /* Optional: sets a neutral border color */
+  box-shadow: none; /* Removes the default focus shadow if any */
+}
+
+.spinner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-left-color: #09f;
+  animation: spin 1s ease infinite;
+  position:absolute;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+.component-details {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 5px;
+  display: none; /* Initially hide details */
+}
+
+
+
+/* Style the input group to match the mockup, ensure correct margins */
+.input-group.mb-3 {
+  margin-bottom: 10px; /* Match to the mockup's spacing */
+}
+
+/* Additional styles as needed to match the mockup */
+
+.component-item {
+  margin-bottom: 10px;
+}
+
+.component-header {
+  user-select: none;
+  cursor: pointer; /* Indicates the element is interactive */
+}
+
+.component-header .component-name[contenteditable="true"] {
+  border: 1px dashed #ccc; /* Indicates the text is editable */
+  margin-right: 5px; /* Ensures spacing */
+  padding: 2px; /* Better visual feedback */
+}
+
+.arrow-toggle {
+  user-select: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.component-details-content {
+  /* Fixed height */
+  position: absolute;
+  top: 0; /* Adjust as needed */
+  left: 0; /* Adjust as needed */
+  right: 0; /* Adjust as needed */
+  bottom: 0; /* Adjust as needed */  
+  /* Scrollable overflow */
+  overflow-y: auto; /* Enables vertical scrolling if the content overflows */
+  overflow-x: hidden; /* Keeps the horizontal overflow hidden */
+  
+  background-color: white;
+  list-style-type: none; /* Removes the default list item markers */
+}
+
+.component-details-content #page-item-ul-top {
+  min-width: 50px;
+  min-height: 50px;
+  border: 1px dotted #607d8b;
+  border-radius: 5%;
+  margin-bottom: 4px;
+}
+
+.component-details-content #line {
+  display: flex !important;
+  width: 10 0% !important;
+  border: none;
+  background-color: gray;
+  height: 2px;
+  /* margin-left: -9px !important; */
+}
+
+.component-details-content #page-item-ul-bottom {
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 5%;
+  border: 1px dotted #607d8b;
+  margin-top: 4px;
+}
+
+.component-details-content #row-item {
+  min-height: 50px;
+}
+
+.component-details-content .page-item {
+  min-height: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* #page input {
+min-height: 25px;
+padding-left: 10px;
+padding-right: 10px;
+} */
+
+.component-details-content > .fractions-div .page-item {
+  min-height: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+.component-details-content .page-item-ul {
+  /*    padding-top: 10px;
+    padding-bottom: 10px;*/
+  height: 100% !important;
+}
+
+
+
+.component-details-content .btn-fractions {
+  background-color: none !important;
+  border: none !important;
+}
+
+
+.component-details-content .btn-tutor-title {
+  width: 60%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 45px;
+}
+
+#ccomponent-details-content .btn-row {
+  width: 100% !important;
+  /*    margin-top: 20px;*/
+  /*     height: 100%; */
+  /* height: fit-content; */
+  /* overflow: unset; */
+}
+
+
+.component-details-content .btn-initial-problem {
+  margin-right: 5px;
+  margin-left: 5px;
+  /* width: 15%;
+    height: 45px; */
+  display: flex !important;
+  align-items: center !important; /* Vertical center alignment */
+  justify-content: center;
+}
+
+#ccomponent-details-content .btn-label {
+  margin-right: 5px;
+  margin-left: 5px;
+  /* width: 15%;
+    height: 45px; */
+  display: flex !important;
+  align-items: center !important; /* Vertical center alignment */
+  justify-content: center;
+}
+
+#ccomponent-details-content .btn-input-box-t {
+  margin-right: 5px;
+  margin-left: 5px;
+  /* width: 15%;
+    height: 45px; */
+  display: flex !important;
+  align-items: center !important; /* Vertical center alignment */
+  justify-content: center;
+}
+
+.component-details-content .btn-input-box-v {
+  margin-right: 5px;
+  margin-left: 5px;
+  /* width: 15%;
+    height: 45px; */
+  display: flex !important;
+  align-items: center !important; /* Vertical center alignment */
+  justify-content: center;
+}
+
+.component-details-content .btn-column {
+  /*    margin-top: 20px;*/
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.component-details-content .btn-row::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: 6px solid transparent;
+  border-radius: 20px;
+  background-clip: padding-box;
+}
+
+.component-details-content .btn-row::-webkit-scrollbar {
+  width: 20px;
+}
+
+.component-details-content .btn-column::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: 6px solid transparent;
+  border-radius: 20px;
+  background-clip: padding-box;
+}
+
+.component-details-content .btn-column::-webkit-scrollbar {
+  width: 20px;
+}
+
+.component-details-content::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: 6px solid transparent;
+  border-radius: 20px;
+  background-clip: padding-box;
+}
+
+.component-details-content::-webkit-scrollbar {
+  width: 20px;
+}
+
+.component-details-content .removeFromDom {
+  display: none !important;
+  visibility: hidden !important;
+}
+.copy-mode-border {
+  border: 2px solid #ffcd29; /* Example: Blue dashed border */
+}
+
+
+/* General styling for the component gallery */
+#components-list {
+  font-family: Arial, sans-serif; /* Use your desired font-family */
+}
+
+/* Styling for the component item */
+.component-item {
+  background-color: #ffffff; /* White background for component */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Slight shadow for depth */
+  margin-bottom: 20px; /* Spacing between components */
+}
+
+/* Header of the component */
+.component-header {
+  background-color: #D3D3D3; /* Change to your desired header color */
+  color: #333; /* Dark text for contrast */
+  padding: 10px;
+  cursor: pointer; /* Change cursor to indicate this can be interacted with */
+}
+
+/* Arrow toggle */
+.arrow-toggle {
+  font-size: 24px; /* Larger arrow icon */
+}
+
+/* Component details styling */
+.component-details {
+  padding: 15px;
+  background-color: #ffffff; /* White background for details */
+}
+
+/* Input field styling */
+.input-group .form-control {
+  border: 2px solid #ddd; /* Subtle border for the input */
+  padding: 10px;
+  font-size: 16px; /* Larger font for readability */
+  margin-right: 25px; 
+  border-radius: 20px;
+  border-bottom-right-radius:  20px !important ;
+  border-top-right-radius:  20px !important;
+
+  box-shadow: none; /* Removes the Bootstrap shadow if you don't want it */
+  cursor: text;
+
+}
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25); /* Adjust the rgba values to get the desired shadow color and spread */
+    border-color: #ddd; /* Set this to your preferred border color */
+    outline: 0; /* Removes the default browser outline */
+    box-shadow: none; /* Removes the Bootstrap shadow if you don't want it */
+  
+
+}
+
+.btn-generate {
+  background-color: lightblue !important;
+  border: solid;
+  border-color: lightblue !important;
+  color: black !important;
+}
+
+.generate_component_btn {
+  background-color: rgba(173, 216, 230, 0.352) !important;
+  border: solid;
+  border-color: lightblue!important;
+}
+
+
+.input-group .btn-clear {
+  background-color: white !important;
+  border: solid;
+  border-color:grey !important;
+  color: black !important;
+}
+
+
+.input-group .btn-delete {
+  background-color: rgba(255, 33, 33, 0.298) !important;
+  border: solid;
+  border-color: red !important;
+  color: black !important;
+} 
+
+.btn-add-component {
+  background-color: rgb(199, 199, 199) !important;
+  border: solid;
+  border-color: rgb(158, 158, 158) !important;
+  color: black !important;
+} 
+.component-details-container {
+  height: 300px; /* Height can be auto or set to a fixed value if needed */
+
+  position: relative; /* This ensures that the spinner is positioned relative to page_parent */
+  /* ... other styles ... */
+}
+
+.keyboard-shortcuts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 15px; /* Adjust spacing from the buttons */
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #f9f9f9; /* Light background color for the container */
+  padding: 4px;
+  border-radius: 4px;
+  font-size: larger; /* Increase the font size */
+
+}
+
+.keyboard-key {
+  padding: 2px 8px;
+  border: 1px solid #ddd; /* Lighter border for the keys */
+  border-radius: 4px;
+  background-color: #fff;
+  text-align: center;
+  font-weight: bold; /* Make font weight bold for better visibility */
+  color: #000; /* Make the font color black for better contrast */
+
+
+}
+
+.keyboard-plus {
+  font-size: 1rem; /* Size of the plus sign */
+  color: #000; /* Make the font color black for better contrast */
+}
+
+.shortcut-description {
+  margin-left: 5px; /* Space before the description */
+  margin-right: 15px; /* Space after the description, before the separator */
+  font-style: italic;
+  color: #000; /* Make the font color black for better contrast */
+}
+
+.separator {
+  height: 24px;
+  width: 1px;
+  background-color: #ddd; /* Light color for the separator */
+  margin: 0 12px; /* Spacing around the separator */
+}

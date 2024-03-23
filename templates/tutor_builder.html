@@ -1,0 +1,455 @@
+{% extends "base.html" %} {% block title %} Home {% endblock %} {% block heading
+%}Please see the list of tutors available below{% endblock %} {% block content
+%}
+
+<div id="tutor-list">
+   <div class="row p-6">
+      <!-- Tutor title -->
+      <div id="tutor-title">
+         <div class="row" style="height: 100%">
+            <div class="row">
+               <div id="title-font" class="fw-bold align-self-center">
+                  Tutor Builder
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- tutor-body -->
+      <div class="mt-5" id="tutor_body">
+         <div class="row gap-5">
+            <!-- playground -->
+            <div class="border rounded-2 border-5 col-8 p-1" id="playground">
+               <div class="undo-redo-buttons d-flex justify-content-start mt-2 ml-3">
+                  <button class="btn btn-secondary btn-lg ml-2 mr-2" id = "undo">Undo</button>
+                  <button class="btn btn-secondary btn-lg" id = "redo">Redo</button>
+                  <div class="keyboard-shortcuts ml-auto mr-10">
+                     <div class="keyboard-key">Shift</div>
+                     <div class="keyboard-plus">+</div>
+                     <div class="keyboard-key">Click</div>
+                     <span class="shortcut-description">Select multiple</span>
+                     <div class="separator"></div>
+                     <div class="keyboard-key">Backspace</div>
+                     <div class="keyboard-plus">+</div>
+                     <div class="keyboard-key">Backspace</div>
+                     <span class="shortcut-description">Remove selected</span>
+                     <div class="separator"></div>
+                     <div class="keyboard-key">Cmd</div>
+                     <div class="keyboard-plus">+</div>
+                     <div class="keyboard-key">C</div>
+                     <span class="shortcut-description">Copy</span>
+                     <div class="separator"></div>
+                     <div class="keyboard-key">Click</div>
+                     <span class="shortcut-description">Paste (in copy mode)</span>
+                     <div class="separator"></div>
+                   </div>
+              </div>
+
+               <div id="page_parent" class="border border-5 rounded-3 mt-4 drop-box">
+
+                  <div id="loadingSpinner" class="spinner-overlay" style="display: none">
+                     <div class="spinner"></div>
+                  </div>
+
+                  <div id="page">
+                     <ul class="list one gap-3" id="page-container" data-type="page-items"></ul>
+                     <div class="container mx-auto flex flex-col py-1 justify-center items-center" id="title-container">
+                     </div>
+
+                  </div>
+
+
+               </div>
+               <div id="copyModeLabel" style="display: none; margin-bottom: 15px; position: relative; background-color: #ffcd29; color: white; border-radius: 5px;">
+                  Copy Mode Enabled
+              </div>
+               <div style="height: 25%; margin-top: 30px">
+                  <div class="">
+                     <textarea class="text-area" rows="8"></textarea>
+                  </div>
+               </div>
+               <div class="gap-5 d-flex justify-content-end p-1">
+                  <button type="button" class="btn btn-dark disabled" id="btn_hint">
+                     <div>Next Hint</div>
+                  </button>
+
+                  <button type="button" class="btn btn-dark disabled" id="btn_hint">
+                     <div>Done</div>
+                  </button>
+               </div>
+            </div>
+
+            <div class="col" id="drag_drop">
+               <!-- drag and drop -->
+               <div class="tab-switcher-container mb-3">
+                  <button class="btn btn-dark rounded-button" id="show-td">
+                     Magic Tutor Designer
+                  </button>
+                  <button class="btn btn-dark rounded-button" id="show-cg">
+                     Components Gallery
+                  </button>
+                  <button class="btn btn-dark rounded-button" id="show-dd">
+                     Drag and Drop
+                  </button>
+                  <button class="btn btn-dark rounded-button" id="show-ed">
+                     Editor
+                  </button>
+               </div>
+
+               <div class="border rounded-2 border-5 p-3 mt-5 " id="ai-tutor-designer">
+                  <div class="border rounded-2 border-5">
+                     <div class="bg-warning rounded-2" style="height: 50px; width: 100%">
+                        <div class="row" style="height: 100%">
+                           <div class="fw-bold fs-2 align-self-center">
+                              Magic Tutor Designer
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="d-flex flex-column gap-4 p-3" id="ai-tutor-elements">
+                        <div class="btn btn-light rounded-button" id="tutor-designer-text-area">
+                           <textarea class="form-control tutor-designer-input" placeholder="Enter Tutor content here..."
+                              style="height: 100px"></textarea>
+                        </div>
+                        <button data-type="details" type="button" class="btn btn-generate rounded-button"
+                           id="generate_btn">
+                           Generate
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <!-- Components Gallery -->
+               <div class="border rounded-2 border-5 p-3 mt-5   " id="components-gallery">
+                  <div class="bg-warning rounded-2" style="height: 50px; width: 100%">
+                     <div class="row" style="height: 100%">
+                        <div class="fw-bold fs-2 align-self-center">
+                           Components Gallery
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- Components List -->
+                  <div id="components-list">
+                     <!-- Each component item -->
+                     <div class="component-item border rounded-2 my-3">
+                        <div class="component-header d-flex justify-content-between align-items-center">
+                           <span class="component-name" contenteditable="false" style="font-weight: bold; font-size: 20px;" >Component 1</span>
+                           <span class="arrow-toggle">&#9660;</span>
+                        </div>
+
+                        <div class="component-details flex-column border rounded-2">
+                           <!-- Grey area for component details -->
+
+                           <div class="component-details-container bg-light border rounded-2" id="Component 1-details-container">
+                              <div class="spinner-overlay" style="display: none">
+                                 <div class="spinner"></div>
+                              </div>
+                              <ul  class="component-details-content" data-type="page-items"> </ul>
+                             
+                              <div class="container mx-auto flex flex-col py-1 justify-center items-center" >
+                                 
+                              </div>
+                           </div>
+                           <!-- Input group with text field and buttons -->
+                           <div class="input-group mt-3 p-2">
+                              <input type="text" class="form-control" placeholder="Descibe the component..."
+                                 aria-label="Component input"/>
+                              <div class="input-group-append">
+                                 <button class="btn generate_component_btn rounded-button me-2" type="button">
+                                    Generate
+                                 </button>
+                                 <button class="btn btn-clear rounded-button me-2" type="button">
+                                    Clear
+                                 </button>
+                                 <button class="btn btn-delete rounded-button" type="button">
+                                    Delete
+                                 </button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- Add Component Button -->
+                  <div class="d-flex flex-column add-component text-center my-3">
+                     <button id="add-component-btn" data-type="details" type="button"
+                        class="btn btn-add-component " >
+                        Add component...
+                     </button>
+                  </div>
+               </div>
+               <div class="border rounded-2 border-5 p-3 mt-5 " id="drag-drop-section" xd>
+                  <div>
+                     <div class="bg-warning rounded-2" style="height: 50px; width: 100%">
+                        <div class="row" style="height: 100%">
+                           <div class="fw-bold fs-2 align-self-center">
+                              Drag and Drop
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="d-flex flex-column gap-4 p-3" id="draggable">
+                        <div data-type="page-items" draggable="true" type="button"
+                           class="btn btn-primary btn-tutor-title rounded-button" id="tutor-title-item">
+                           <p class="page-item" id="page-item"></p>
+                           <p class="removeFromDom">Tutor Title</p>
+                        </div>
+                        <!--<div data-type = "page-row" draggable="true" type="button" class="btn btn-secondary btn-initial-problem rounded-button" id="iniial-problem"><p class="page-item" id="page-item"></p><p class="removeFromDom">Initial Problem</p></div>-->
+                        <div data-type="page-row" draggable="true" type="button" class="btn btn-success btn-label rounded-button row" id="label"><p class="page-item align-self-center" id="label-item"></p><p class="removeFromDom">Label</p>
+                        </div>
+                        <div data-type="page-row" draggable="true" type="button"
+                           class="btn btn-light btn-input-box-t rounded-button" id="Input-Box1">
+                           <input type="text" class="form-control" placeholder="Text Box" id="input-box" required style="
+                          border: none;
+                          box-shadow: none;
+                          text-align: center;
+                        " />
+                        </div>
+
+                        <!-- <div data-type = "page-row" draggable="true" type="button" class="btn btn-danger btn-input-box-v rounded-button" id="input-box-v"><p class="page-item" id="page-item"></p><p class="removeFromDom">Input box(Virtual Keyboard)</p></div>-->
+                        <div data-type="page-row" draggable="true" type="button"
+                           class="btn btn-warning btn-row btn-row-item drop-box rounded-button grid" id="row-item">
+                           <p class="removeFromDom">Row</p>
+                           <ul class="list one grid grid-flow-col gap-1 page-item-ul" 
+                              data-type="page-row"></ul>
+                        </div>
+                        <div data-type="page-items" draggable="true" type="button"
+                           class="btn btn-info btn-column drop-box rounded-button btn-column" id="column-item">
+                           <p class="removeFromDom">Column</p>
+                           <ul class="list one d-flex page-item-rl-row flex-column gap-2" data-type="page-row">
+                           </ul>
+                        </div>
+                        <!-- <div data-type = "page-row" draggable="true" type="button" class="btn btn-dark btn-spacer rounded-button" id="spacer">Spacer</div>-->
+                     </div>
+                     <!-- <div class="d-flex flex-column gap-4 p-3" id="draggable">
+                           <button data-type = "column" type="button" class="btn btn-info btn-column drop-box rounded-button" id="">Column</button>
+                     </div> -->
+                     <div class="d-flex flex-column gap-4 p-3"></div>
+                  </div>
+               </div>
+
+               <!-- Inspector -->
+
+               <div class="border rounded-2 border-4 mt-5 p-3" id="editor-section" style="height: 350px">
+                  <div class="bg-warning rounded-2 row" style="height: 50px">
+                     <div class="fw-bold fs-2 align-self-center">Edit</div>
+                  </div>
+
+                  <div class="d-flex flex-column gap-4 p-3">
+                     <div class="input-group mb-1 gap-4">
+                        <label data-type="details" type="button" class="btn btn-dark btn-details rounded-button"
+                           id="">edit ID :</label>
+                        <input type="text" class="form-control" placeholder="Please enter id  . . . "
+                           aria-label="id-input" aria-describedby="basic-addon1" id="Component-Id" required />
+                     </div>
+
+                     <div class="input-group mb-1 gap-4">
+                        <label data-type="details" type="button" class="btn btn-dark btn-details rounded-button"
+                           id="">Value :</label>
+                        <input type="text" class="form-control" placeholder="Please enter value  . . . "
+                           aria-label="value-input" aria-describedby="basic-addon1" id="Component-Value" required />
+                     </div>
+                     <button data-type="details" type="button" class="btn btn-dark btn-details rounded-button"
+                        id="delete_btn">
+                        Delete
+                     </button>
+                     <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-type="details"
+                        type="button" class="btn btn-dark btn-details rounded-button" id="reset_btn">
+                        Reset
+                     </button>
+                     <div id="popup-modal" tabindex="-1"
+                        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div class="relative w-full max-h-full" id="modal-width">
+                           <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                              <button type="button"
+                                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                 data-modal-hide="popup-modal">
+                                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                       d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                       clip-rule="evenodd"></path>
+                                 </svg>
+                                 <span class="sr-only">Close modal</span>
+                              </button>
+                              <div class="p-6 text-center">
+                                 <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                       d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                 </svg>
+                                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                    Everything will be removed! Are you sure you want to
+                                    reset it?
+                                 </h3>
+                                 <button id="tutor_reset" data-modal-hide="popup-modal" type="button"
+                                    class="tutor_reset text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                    Reset
+                                 </button>
+                                 <button data-modal-hide="popup-modal" type="button"
+                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                    Cancel
+                                 </button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <!-- Save, Train, Preview button group -->
+         <div class="bg-info row rounded-3" style="height: 150px; margin-top: 300px; margin-bottom: 150px">
+            <div class="row">
+               <div class="gap-5 d-flex align-self-center justify-content-center">
+                  <button type="button" class="btn btn-dark tutor-button-group" id="save_tutor"
+                     data-modal="#login-modal">
+                     <div class="btn_group" id="">Save Tutor Draft</div>
+                  </button>
+
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                 Modal title
+                              </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                              </svg>
+                              <h1 style="text-align: center">
+                                 Please note, a tutor with the same title already exists!
+                              </h1>
+                           </div>
+                           <div class="modal-footer">
+                              <button data-modal-hide="popup-modal" type="button"
+                                 class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                                 id="btn_save_tutor">
+                                 Save as New Tutor
+                              </button>
+                              <button data-modal-hide="popup-modal" type="button"
+                                 class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                 id="btn_update_tutor">
+                                 Update Existing Tutor
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="modal fade" id="SuccessModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                           <div class="modal-body">
+                              <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                              </svg>
+                              <h1 style="text-align: center">Successful!</h1>
+                           </div>
+                           <div class="modal-footer">
+                              <button data-modal-hide="popup-modal" type="button"
+                                 class="closeModal text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                                 id="btn_ok">
+                                 OK
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="modal fade" id="TrainModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                           <div class="modal-body">
+                              <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                              </svg>
+                              <h1 style="text-align: center">Please save tutor first!</h1>
+                           </div>
+                           <div class="modal-footer">
+                              <button data-modal-hide="popup-modal" type="button"
+                                 class="closeModal text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                                 id="btn_ok">
+                                 OK
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="modal fade" id="alertModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                 Modal title
+                              </h5>
+                              <button type="button" class="close closeModal" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                              </svg>
+                              <h1 style="text-align: center">
+                                 Now Tutor title empty. You should be enter the Tutor
+                                 Title!
+                              </h1>
+                           </div>
+                           <div class="modal-footer">
+                              <button data-modal-hide="popup-modal" type="button"
+                                 class="closeModal_not_reload text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                                 id="closeModal_not_reload">
+                                 OK
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <button type="button" class="btn btn-dark tutor-button-group" id="train_tutor">
+                     <div class="btn_group" id="">Train Tutor</div>
+                  </button>
+                  <button type="button" class="btn btn-dark tutor-button-group" id="preview_tutor">
+                     <div class="btn_group" id="">Preview Tutor</div>
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <script type="text/javascript">
+
+      tuturNames = []
+      console.log("This is the database file========", {{ tutors| map(attribute = 1) | list | tojson | safe }});
+      tutorNames = {{ tutors | map(attribute = 1) | list | tojson | safe }}
+
+      console.log(tutorNames)
+   </script>
+
+   {% endblock %}
+</div>
