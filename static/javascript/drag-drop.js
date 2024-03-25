@@ -2113,14 +2113,6 @@ if (
         dragonedComponentsList.push(instance);
       }
 
-      
-      // Double-click to rename component
-      dragonedComponentsList.addEventListener("dblclick", function (e) {
-        if (e.target.classList.contains("component-name")) {
-          e.target.contentEditable = true;
-          e.target.focus();
-        }
-      });
 
         
     })();
