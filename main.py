@@ -126,46 +126,12 @@ def profile():
 @app.route("/my_tutors", methods=["GET", 'POST'])
 def my_tutors():
 
-    token = session.get('token')
-    if not token:
-            return redirect(url_for('index'))
-            # return jsonify({'Alert!': 'Token is missing!'}), 401
-    try:
-        # data = token
-        data = jwt.decode(token, config['SECRET_KEY'], algorithms='HS256')
-    except Exception as e:
-        return jsonify(e), 401
-
-    id = data['id']
     conn = get_db_connection()
-    tutors = conn.execute(f"SELECT id, name, IsOnline FROM tutors WHERE user_id='{id}' ").fetchall()
+    tutors = conn.execute(f"SELECT id, name FROM tutors ").fetchall()
     conn.close()
 
     return render_template("my_tutors.html", tutors=tutors)
 
-
-@app.route('/browse_tutors')
-def browse_tutors():
-
-    token = session.get('token')
-    if not token:
-            return redirect(url_for('index'))
-            # return jsonify({'Alert!': 'Token is missing!'}), 401
-    try:
-        # data = token
-        data = jwt.decode(token, config['SECRET_KEY'], algorithms='HS256')
-    except Exception as e:
-        return jsonify(e), 401
-    
-    conn = get_db_connection()
-
-    tutors = conn.execute('SELECT * FROM tutors WHERE IsOnline = 1').fetchall()
-
-
-    # print("tutors_result=====", tutors)
-
-    conn.close()
-    return render_template('browse_tutors.html', user=data, tutors=tutors)
 
 #Update_tutor_content
 @app.route("/update_tutor_content", methods=['POST'])
@@ -312,7 +278,6 @@ def update_tutor_online():
 
 
 @app.route("/update_tutor_follow_online", methods=['POST'])
-@token_required
 def update_tutor_follow_online():
 
     request_data = request.get_json()
@@ -371,6 +336,7 @@ def delete():
     # print("This is tutor_delete function!!!!!!")
 
     request_data = request.get_json()
+    print(request_data)
 
     Id = request_data['Id']
 
@@ -378,7 +344,6 @@ def delete():
 
     conn.execute(
         'DELETE FROM tutors WHERE id=?', (Id,))
-
     conn.commit()
 
     toReturn = {"return": "True"}
@@ -406,17 +371,9 @@ def tutor_edit():
 
 # Save
 @app.route("/save", methods=['POST'])
-@token_required
 def save():
-    resp = check_token()
-    if resp.get("error"):
-        if "redirect" in resp:
-            return redirect(url_for(resp["redirect"]))
-        else:
-            return jsonify(resp["error"]), resp["error_code"]
-    token = resp["token"]
 
-    tutor.save(token["id"], request.get_json())
+    tutor.save(request.get_json())
     return jsonify({"return": "True"})
 
 

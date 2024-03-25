@@ -913,17 +913,27 @@ padding-right: 10px;
   /* ... other styles ... */
 }
 
+
 .keyboard-shortcuts {
+  /* Existing styles */
   display: flex;
-  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping */
   gap: 8px;
-  margin-left: 15px; /* Adjust spacing from the buttons */
+  margin-left: auto;
+  margin-right: 2.5rem; /* Tailwind's mr-10 equivalent */
   font-family: 'Courier New', Courier, monospace;
-  background-color: #f9f9f9; /* Light background color for the container */
+  background-color: #f9f9f9;
   padding: 4px;
   border-radius: 4px;
-  font-size: larger; /* Increase the font size */
+  font-size: larger;
+}
 
+/* Tailwind's medium breakpoint is 768px by default */
+@media (max-width: 768px) {
+  .keyboard-shortcuts {
+    flex-direction: column;
+    margin-right: 1rem; /* Adjust right margin on smaller screens */
+  }
 }
 
 .keyboard-key {

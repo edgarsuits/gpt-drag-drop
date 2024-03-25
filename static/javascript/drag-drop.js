@@ -442,7 +442,9 @@ $(document).ready(function (e) {
  * This method allows for the dynamic removal of tutor records without the need to reload the webpage, streamlining the user experience in managing tutor information.
  */
   $("#mytutor_delete").click(function (event) {
-    Id = $(this).closest("tr").find("td").eq(0).html();
+    var deleteButton = $(this).closest("tr").find(".btn.btn-dark.black_color[data-modal-target='popup-modal']");
+    // Retrieve the 'data-id' from the found "Delete" button
+    var Id = deleteButton.data('id');
 
     var data = {
       Id: Id,
@@ -456,6 +458,8 @@ $(document).ready(function (e) {
       contentType: "application/json",
       success: function (response) {
         $("#SuccessModal").modal("show");
+            $('tr[data-id="' + Id + '"]').remove(); // Remove the row with the matching data-id attribute
+
       },
       error: function (error) {
         //console.log(error);
@@ -613,7 +617,12 @@ $(document).ready(function (e) {
  * as well as the function `get_request_body` for constructing the request payload.
  */
   function save_tutor() {
-    Id = $(this).parents("tr").find("td").eq(0).html();
+    console.log("OK")
+    //Id = $(this).parents("tr").find("td").eq(0).html();
+    var deleteButton = $(this).parents("tr").find(".btn.btn-dark.black_color[data-modal-target='popup-modal']");
+    // Retrieve the 'data-id' from the found "Delete" button
+    Id = deleteButton.data('id');
+
     var content = $("#page_parent").html();
     var tutorName = $(".btn-tutor-title p.page-item").text();
 
@@ -745,19 +754,6 @@ $(document).ready(function (e) {
     }
   });
 
-  $("#btn_browserTutors").click(function () {
-    if (isEmptyTutor()) {
-      $("#confirmModal").data("page", "/browse_tutors");
-      window.location.href = $("#confirmModal").data("page");
-    } else {
-      if (isSaved == 0) {
-        $("#confirmModal").modal("show");
-      } else {
-        $("#confirmModal").data("page", "/browse_tutors");
-        window.location.href = $("#confirmModal").data("page");
-      }
-    }
-  });
 
   $("#btn_myProfile").click(function () {
     if (isEmptyTutor()) {
@@ -1225,25 +1221,7 @@ $(document).ready(function (e) {
         });
       document.getElementById("redo").addEventListener("click", redo, false);
       document.getElementById("undo").addEventListener("click", undo, false);
-      document
-        .getElementById("Component-Id")
-        .addEventListener("keyup", changeIDHandler, false);
-      document
-        .getElementById("Component-Value")
-        .addEventListener("keyup", changeComponentValue, false);
-      document
-        .getElementById("input-box")
-        .addEventListener("keyup", changeInputValue, false);
-      // For logging
-      document
-        .getElementById("Component-Id")
-        .addEventListener("change", changeIDHandlerLog, false);
-      document
-        .getElementById("Component-Value")
-        .addEventListener("change", changeComponentValueLog, false);
-      document
-        .getElementById("input-box")
-        .addEventListener("change", changeInputValueLog, false);
+
       // Event listeners for the buttons
       document.getElementById("show-td").addEventListener("click", function () {
         toggleSection("show-td", "ai-tutor-designer");
@@ -1254,9 +1232,7 @@ $(document).ready(function (e) {
       document.getElementById("show-dd").addEventListener("click", function () {
         toggleSection("show-dd", "drag-drop-section"); // Use the actual ID for the Drag and Drop section
       });
-      document.getElementById("show-ed").addEventListener("click", function () {
-        toggleSection("show-ed", "editor-section"); // Use the actual ID for the Editor section
-      });
+
 
       // Initialize sections to be visible or hidden
       document.getElementById("ai-tutor-designer").style.display = "block"; // Default to showing the designer
@@ -1265,9 +1241,7 @@ $(document).ready(function (e) {
       // document.getElementById('drag-drop-section').style.display = 'none';
       // document.getElementById('editor-section').style.display = 'none';
 
-      document
-        .getElementById("delete_btn")
-        .addEventListener("click", deleteComponentHandler, false);
+
       const componentsList = document.getElementById("components-list");
 
       // Function to toggle component details
@@ -1648,7 +1622,7 @@ if (
 
             }
             selectedElements.splice(0, selectedElements.length);
-
+          component = document.getElementById(EditItem.id)
           EditItem.remove();
           LOG.push(
             create_log_item(
