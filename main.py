@@ -25,18 +25,18 @@ import sys
 from app_setup import *
 import database
 import helpers
-import logger
-
 import tutor
 import openai
 
 sys.setrecursionlimit(10000)
-openai.api_key = os.getenv('OPENAI_API_KEY', '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')
 
 ########
 # AUTH #
 ########
-
+def get_openai_key():
+    with open('openai_key.txt', 'r') as file:
+        return file.read().strip()
+openai.api_key = get_openai_key()
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
@@ -56,21 +56,6 @@ def index():
 ###########
 # GENERAL #
 ###########
-
-@app.route("/log", methods=["POST"])
-def log():
-    resp = check_token()
-    if resp.get("error"):
-        if "redirect" in resp:
-            return redirect(url_for(resp["redirect"]))
-        else:
-            return jsonify(resp["error"]), resp["error_code"]
-    token = resp["token"]
-
-    if request.method == "POST":
-        params = helpers.validate_params(data=request.get_json(), token=token)
-        logger.log(params["user_id"], params["log_items"])
-        return flask.jsonify({})
 
 
 
@@ -102,25 +87,27 @@ def tutor_builder():
 
 @app.route("/profile", methods=["GET", 'POST'])
 def profile():
-
-    conn = get_db_connection()
-    tutors = conn.execute('SELECT * FROM tutors').fetchall()
-
-    # print("tutors_result=====", tutors)
-    conn.close()
-
-    token = session.get('token')
-    if not token:
-            return redirect(url_for('index'))
-            # return jsonify({'Alert!': 'Token is missing!'}), 401
+    api_key_exists = False
+    api_key_value = ''
     try:
-        # data = token
-        data = jwt.decode(token, config['SECRET_KEY'], algorithms='HS256')
-    except Exception as e:
-        return jsonify(e), 401
+        with open('openai_key.txt', 'r') as file:
+            api_key_value = file.read().strip()
+            if api_key_value:
+                api_key_exists = True
+    except FileNotFoundError:
+        pass  # It's okay if the file doesn't exist; treat as if no key has been saved yet.
+
+    if request.method == 'POST':
+        openai_key = request.form['api_key']  # Assuming the input for the key has name='first_name'
+
+        # Save the key to a file
+        with open('openai_key.txt', 'w') as file:
+            file.write(openai_key)
+
+        # Redirect or respond accordingly after sav
     
     # # print("************* : ", data.first_name)
-    return render_template("profile.html", user = data, tutors = {})
+    return render_template("profile.html",  api_key_value=api_key_value, api_key_exists=api_key_exists)
 
 
 @app.route("/my_tutors", methods=["GET", 'POST'])

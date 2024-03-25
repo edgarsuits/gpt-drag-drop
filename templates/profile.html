@@ -11,18 +11,7 @@
 <div class="container" style="margin-top: 2%;">
     <div class="main-body">
         <div class="row">
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://oyster.ignimgs.com/wordpress/stg.ign.com/2012/09/pokemon_bulbasaur_desktop_1057x1132_wallpaper-369004-610x653.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
-                            <div class="mt-3">
-                                <h4>{{ user.first_name }} {{ user.last_name }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="col-lg-8">
                 <div class="card">
@@ -30,351 +19,40 @@
                         <form method="POST" action="{{ url_for('profile') }}">
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">First Name</h6>
+                                    <h6 class="mb-0">OpenAI Key</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{ user.first_name }}" id="first-name" name="first_name">
+                                    <input type="text" class="form-control" value="{{ api_key_value }}" id="api-key-input" name="api_key">
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Last Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{ user.last_name }}" id="last-name" name="last_name">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{ user.email }}" id="email" name="email" disabled>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Role</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value="{{ user.role }}" id="role" name="role" disabled>
-                                </div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="submit" class="btn bg-primary btn-lg align-items-center btn-primary px-4" value="Save">
+                                    <input type="submit" class="btn bg-primary btn-lg align-items-center btn-primary px-4" id="save-button" value="Save" {% if api_key_exists %}disabled{% endif %}>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="d-flex align-items-center mb-3">Learning Status</h5>
-                                {% for tutor, performance in tutors.items() %}
-                                <p>{{ tutor }}</p>
-                                <div class="progress mb-3" style="height: 5px">
-                                    {% if performance < 0.5 %}
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{ performance * 100 }}%" aria-valuenow="{{ performance * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    {% elif performance < 0.75 %}
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{ performance * 100 }}%" aria-valuenow="{{ performance * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    {% elif performance < 0.95 %}
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{ performance * 100 }}%" aria-valuenow="{{ performance * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    {% else %}
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ performance * 100 }}%" aria-valuenow="{{ performance * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    {% endif %}
-                                </div>
-
-                                    {% if tutor == "Factoring using the slip and slide method" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse1">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in slip_slide_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    {% elif tutor == "Factoring using the area “box” method" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse2">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in box_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    {% elif tutor == "Factoring with leading coefficient 1" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse3">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in leading_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    {% elif tutor == "Factoring by grouping method" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse4">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in grouping_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-
-                                    {% elif tutor == "Radicals Product Rule" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse5">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in product_rule_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-
-                                    {% elif tutor == "Radicals Quotient Rule" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse6">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in quotient_rule_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-
-                                    {% elif tutor == "Adding Radicals" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse7">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in adding_sqrt_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-
-
-                                    {% elif tutor == "Subtracting Radicals" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse8">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in subtracting_sqrt_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-
-                                    {% elif tutor == "Exponents Product Rule" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse9">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in exponent_product_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-
-
-                                    {% elif tutor == "Exponents Power Rule" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse10">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in exponent_power_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-
-
-                                    {% elif tutor == "Exponents Quotient Rule" %}
-                                    <p>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
-                                            Expand {{ tutor }} Progress
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapse11">
-                                        <div class="card card-body">
-                                            {% for kc, kc_progress in exponent_quotient_map.items() %}
-                                            <p>{{ kc }}</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                {% if kc_progress < 0.5 %}
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.75 %}
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% elif kc_progress < 0.95 %}
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% else %}
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ kc_progress * 100 }}%" aria-valuenow="{{ kc_progress * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endif %}
-                                <hr>
-                                {% endfor %}
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const apiKeyInput = document.getElementById('api-key-input');
+      const saveButton = document.getElementById('save-button');
+  
+      // Flask variable passed to JavaScript
+      const originalApiKey = "{{ api_key_value }}";
+  
+      // Enable the button if the input field is modified
+      apiKeyInput.addEventListener('input', () => {
+        saveButton.disabled = apiKeyInput.value === originalApiKey;
+      });
+    });
+  </script>
 
 {% endblock %}

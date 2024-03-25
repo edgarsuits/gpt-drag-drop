@@ -1,7 +1,6 @@
 import re
 import uuid
 import database
-import logger
 
 
 def save(request):
