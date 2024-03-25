@@ -9,7 +9,7 @@
          <div class="row" style="height: 100%">
             <div class="row">
                <div id="title-font" class="fw-bold align-self-center">
-                  Tutor Builder
+                  GPT Interface Builder
                </div>
             </div>
          </div>
@@ -68,10 +68,8 @@
               ">
                   Copy Mode Enabled
                </div>
-               <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-type="details" type="button"
-                  class="btn btn-dark tutor-button-group" id="reset_btn">
-                  Reset
-               </button>
+
+       
                <div id="popup-modal" tabindex="-1"
                   class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                   <div class="relative w-full max-h-full" id="modal-width">
@@ -109,9 +107,7 @@
                      </div>
                   </div>
                </div>
-               <button type="button" class="btn btn-dark tutor-button-group" id="save_tutor" data-modal="#login-modal">
-                  <div class="btn_group" id="">Save Tutor Draft</div>
-               </button>
+
 
                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                   aria-hidden="true">
@@ -150,6 +146,15 @@
                      </div>
                   </div>
                </div>
+               <div class="flex flex-row justify-end space-x-8">
+
+                  <button type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg px-8 py-4 mt-2 text-xl shadow-md transition duration-300" id="reset_btn" data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-type="details">
+                    Reset
+                  </button>
+                  <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg px-8 py-4 mt-2 text-xl shadow-md transition duration-300" id="save_tutor" data-modal="#login-modal">
+                     Save Tutor Draft
+                   </button>
+                </div>
                <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -177,10 +182,10 @@
                <!-- drag and drop -->
                <div class="tab-switcher-container mb-3">
                   <button class="btn btn-dark rounded-button" id="show-td">
-                     Magic Tutor Designer
+                     Magic Builder
                   </button>
                   <button class="btn btn-dark rounded-button" id="show-cg">
-                     Components Gallery
+                     My Components
                   </button>
                   <button class="btn btn-dark rounded-button" id="show-dd">
                      Drag and Drop
@@ -192,7 +197,7 @@
                      <div class="bg-warning rounded-2" style="height: 50px; width: 100%">
                         <div class="row" style="height: 100%">
                            <div class="fw-bold fs-2 align-self-center">
-                              Magic Tutor Designer
+                              Magic Builder
                            </div>
                         </div>
                      </div>
@@ -214,7 +219,7 @@
                   <div class="bg-warning rounded-2" style="height: 50px; width: 100%">
                      <div class="row" style="height: 100%">
                         <div class="fw-bold fs-2 align-self-center">
-                           Components Gallery
+                           My Components
                         </div>
                      </div>
                   </div>

@@ -320,7 +320,7 @@ h5 {
 }
 
 #page_parent {
-  height: 60%;
+  height: 80%;
   overflow: auto;
   display: flex;
   flex-direction: column;

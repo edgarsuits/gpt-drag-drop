@@ -34,9 +34,29 @@ sys.setrecursionlimit(10000)
 # AUTH #
 ########
 def get_openai_key():
+    # Check if the file exists
+    if not os.path.isfile('openai_key.txt'):
+        # Create the file if it does not exist and write a default value or leave it blank
+        with open('openai_key.txt', 'w') as file:
+            file.write('')  # You could prompt the user for a key or leave it blank
+    # Read the key from the file
     with open('openai_key.txt', 'r') as file:
         return file.read().strip()
+
+def get_prompt():
+    # Check if the prompt file exists
+    if not os.path.isfile('prompt.txt'):
+        # Create the file if it does not exist and write a default value or leave it blank
+        with open('prompt.txt', 'w') as file:
+            file.write('')  # You could provide a default prompt or leave it blank
+    # Read the prompt from the file
+    with open('prompt.txt', 'r') as file:
+        return file.read().strip()
+
+# Usage
 openai.api_key = get_openai_key()
+input_prompt = get_prompt()
+
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
