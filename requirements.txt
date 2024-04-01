@@ -9,5 +9,4 @@ pandas
 numpy
 jsondiff
 scipy==1.11.2
-git+https://github.com/cmaclell/py_rete.git@htn
 gunicorn
