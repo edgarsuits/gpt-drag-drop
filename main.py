@@ -27,7 +27,7 @@ import database
 import helpers
 import tutor
 import openai
-
+import csv 
 sys.setrecursionlimit(10000)
 
 ########
@@ -61,6 +61,36 @@ def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
+
+def import_data_from_dump(dump_file_path, database_path, table_name):
+    """
+    Imports data from a text dump into a specified table in the database.
+    
+    :param dump_file_path: The path to the text dump file.
+    :param database_path: The path to the SQLite database file.
+    :param table_name: The name of the table to insert the data into.
+    """
+    # Connect to the database
+    conn = sqlite3.connect(database_path)
+    cur = conn.cursor()
+    
+    with open(dump_file_path, newline='', encoding='utf-8') as file:
+        # Assuming the file uses CSV format and is properly escaped/quoted
+        reader = csv.DictReader(file)
+        for row in reader:
+            print(row['name'])
+            # Prepare data tuple
+            data = (row['id'], row['name'], row['content'], row['IsOnline'], row['follows'], row['agent_id'])
+            # Insert data into the database
+            cur.execute(f'''
+            INSERT INTO {table_name} (id, name, content, IsOnline, follows, agent_id) 
+            VALUES (?, ?, ?, ?, ?, ?)
+            ''', data)
+    
+    # Commit changes and close the connection
+    conn.commit()
+    conn.close()
+
 
 @app.route("/")
 def index():
@@ -345,7 +375,7 @@ def delete():
     request_data = request.get_json()
     print(request_data)
 
-    Id = request_data['Id']
+    Id = request_data['id']
 
     conn = get_db_connection()
 
@@ -362,19 +392,21 @@ def delete():
 # Edit
 @app.route("/tutor_edit", methods=["GET", 'POST'])
 def tutor_edit():
-    resp = check_token()
-    if resp.get("error"):
-        if "redirect" in resp:
-            return redirect(url_for(resp["redirect"]))
-        else:
-            return jsonify(resp["error"]), resp["error_code"]
-    token = resp["token"]
 
     tutor_id = request.get_json()['Id']
     content = tutor.get_tutor(tutor_id)["content"]
 
     return jsonify({"tutor": content, "tutor_id": tutor_id})
 
+
+# Edit
+@app.route("/tutor_preview", methods=["GET", 'POST'])
+def tutor_preview():
+
+    tutor_id = request.get_json()['Id']
+    content = tutor.get_tutor(tutor_id)["content"]
+
+    return jsonify({"tutor": content, "tutor_id": tutor_id})
 
 # Save
 @app.route("/save", methods=['POST'])
@@ -384,50 +416,6 @@ def save():
     return jsonify({"return": "True"})
 
 
-###################################################
-# Helper methods
-###################################################
-
-@app.route('/upload_file', methods=['GET', 'POST'])
-def upload_file():
-    from io import StringIO
-    # print("GOT TO UPLOAD")
-    response = {"success": False, "error": ""}
-    if request.method == 'POST':
-        # print(request.method)
-        # check if the post request has the file part
-        # print(request.files)
-
-        if 'file' not in request.files:
-            # print("FILE NOT IN REQUEST FILES")
-            response["error"] = "Post request does not contain file part."
-        else:
-            # print(request)
-            # print(request.get_json())
-            params = helpers.validate_params(data=request.get_json())
-            if not params["agent_id"] or not params["state"]:
-                # print("NO AGENT ID OR STATE")
-                response["error"] = "No agent ID or state supplied. Can not upload file."
-            else:
-                # print("FILE IS GOOD")
-                response = helpers.file_upload(request.files['file'], list(params["state"].keys()))
-                if response["success"]:
-                    all_problems = agent.get_agent_field(params["agent_id"], "user_problems")
-                    if all_problems:
-                        all_problems.extend(response["problems"])
-                    else:
-                        all_problems = response["problems"]
-                    agent.update_agent(agent_id=params["agent_id"], column="user_problems", value=all_problems)
-
-    return jsonify(response)
-
-
-###########
-# HELPERS #
-###########
-
-
-
 
 
 ###################################################
@@ -435,6 +423,11 @@ def upload_file():
 
 if __name__ == "__main__":
     database.setup(loads(open("config.json", "r").read()))
-    app.run(debug=True)
+    imported = True
+    if os.path.exists("tutors_dump.txt") and not imported:
+        print("Dump file found. Importing data...")
+        import_data_from_dump("tutors_dump.txt", "database.db", "tutors")
+        print("Data imported successfully.")
+    app.run()
 
 

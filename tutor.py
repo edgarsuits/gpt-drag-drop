@@ -21,6 +21,8 @@ def save(request):
 
 
 def get_tutor(tutor_id):
+
+
     return database.fetch(entity_id=tutor_id, id_column="id", columns="content", table_name="tutors")[0]
 
 

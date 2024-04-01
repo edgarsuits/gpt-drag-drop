@@ -268,7 +268,10 @@ $(document).ready(function (e) {
  * explicitly handled beyond default browser logging.
  */
   $("#mytutor_rename").click(function () {
-    Id = $(this).parents("tr").find("td").eq(0).html();
+    var deleteButton = $(this).parents("tr").find(".btn.btn-dark.black_color[data-modal-target='popup-modal']");
+
+    Id = deleteButton.data('id');
+
     tutorName = $("#tutor_rename").val();
     var log_item = create_log_item(
       "Tutor Building",
@@ -342,7 +345,9 @@ $(document).ready(function (e) {
  */
 
   $(".mytutor_upload").click(function () {
-    Id = $(this).parents("tr").find("td").eq(0).html();
+    var deleteButton = $(this).parents("tr").find(".btn.btn-dark.black_color[data-modal-target='popup-modal']");
+
+    Id = deleteButton.data('id');
 
     var content = {
       IsOnline: 1,
@@ -363,73 +368,7 @@ $(document).ready(function (e) {
       },
     });
   });
-/**
- * Attaches a click event listener to elements with the class `browse_tutor_unupload_online`.
- * This listener executes the following actions upon being triggered:
- * 1. Extracts the ID of a tutor from the first table cell (`<td>`) in the parent row (`<tr>`), which is used to uniquely identify the tutor.
- * 2. Creates an object with `IsOnline` set to `0` and `id` to the extracted tutor ID, indicating the intention to update the tutor's online status to offline.
- * 3. Initiates a POST request to the `/update_tutor_online` server endpoint, sending the created object as a JSON payload.
- *    - On successful completion of the request, it displays the `#SuccessModal`, signifying that the tutor's status has been successfully updated to offline.
- *    - Should there be an error with the request, the current implementation does not provide explicit error handling, but it could be implemented to enhance user feedback.
- *
- * This approach facilitates the dynamic management of a tutor's online status directly from the client interface without needing to refresh the page.
- */
-  $(".browse_tutor_unupload_online").click(function () {
-    Id = $(this).parents("tr").find("td").eq(0).html();
 
-    var content = {
-      IsOnline: 0,
-      id: Id,
-    };
-
-    $.ajax({
-      url: "/update_tutor_online",
-      data: JSON.stringify(content),
-      type: "POST",
-      contentType: "application/json",
-      success: function (response) {
-        //console.log("response", JSON.stringify(content));
-        $("#SuccessModal").modal("show");
-      },
-      error: function (error) {
-        //console.log(error);
-      },
-    });
-  });
-/**
- * Attaches a click event listener to elements with the class `btn_save_online_follow`.
- * This function increments the follow count for a specific tutor and updates it on the server:
- * 1. Retrieves the tutor's unique ID from the first table cell (`<td>`) within the same row (`<tr>`) as the clicked button.
- * 2. Extracts the current number of follows from the fifth table cell (`<td>`) in the same row, converts it to an integer, and increments it by 1.
- * 3. Constructs an object containing the updated number of follows and the tutor's ID.
- * 4. Sends this object as a JSON string in a POST request to the `/update_tutor_follow_online` endpoint.
- *    - If the request is successful, it displays the `#SuccessModal`, indicating the follow count was successfully updated.
- *    - If the request encounters an error, the current implementation does not explicitly handle it, but this could be expanded to improve user experience.
- *
- * This process allows for real-time updates to the tutor's follow count without requiring a page reload.
- */
-  $(".btn_save_online_follow").click(function () {
-    Id = $(this).parents("tr").find("td").eq(0).html();
-    follows = parseInt($(this).parents("tr").find("td").eq(4).text());
-    var content = {
-      follows: follows + 1,
-      id: Id,
-    };
-
-    $.ajax({
-      url: "/update_tutor_follow_online",
-      data: JSON.stringify(content),
-      type: "POST",
-      contentType: "application/json",
-      success: function (response) {
-        //console.log("response", JSON.stringify(content));
-        $("#SuccessModal").modal("show");
-      },
-      error: function (error) {
-        //console.log(error);
-      },
-    });
-  });
 /**
  * Attaches a click event listener to the element with the ID `mytutor_delete`.
  * This function facilitates the deletion of a tutor's record from the server:
@@ -442,6 +381,7 @@ $(document).ready(function (e) {
  * This method allows for the dynamic removal of tutor records without the need to reload the webpage, streamlining the user experience in managing tutor information.
  */
   $("#mytutor_delete").click(function (event) {
+    
     var deleteButton = $(this).closest("tr").find(".btn.btn-dark.black_color[data-modal-target='popup-modal']");
     // Retrieve the 'data-id' from the found "Delete" button
     var Id = deleteButton.data('id');
@@ -493,7 +433,9 @@ $(document).ready(function (e) {
  * Note: This function assumes the server responds with a JSON object containing the tutor's data necessary for editing. The operation to replace the page content (`$("#page").replaceWith(result);`) suggests an immediate display of the tutor's information for editing, although this action seems redundant given the preceding redirection to `/edit`.
  */
   $(".mytutor_edit").click(function () {
-    Id = $(this).parents("tr").find("td").eq(0).html();
+    var deleteButton = $(this).parents("tr").find(".btn.btn-dark.black_color[data-modal-target='popup-modal']");
+
+    Id = deleteButton.data('id');
 
     var data = {
       Id: Id,
@@ -534,7 +476,9 @@ $(document).ready(function (e) {
  * This mechanism enables dynamic previewing of tutor content without the need for page reloads, offering a more seamless user experience.
  */
   $(".mytutor_preview").click(function () {
-    Id = $(this).parents("tr").find("td").eq(0).html();
+    var deleteButton = $(this).parents("tr").find(".btn.btn-dark.black_color[data-modal-target='popup-modal']");
+
+    Id = deleteButton.data('id');
 
     var data = {
       Id: Id,
