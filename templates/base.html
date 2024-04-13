@@ -1,152 +1,125 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        {% block head %}
-        <!-- <script src="/javascript/jquery-3.6.0.min.js"></script> -->
 
-        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
-              rel = "stylesheet">
-        <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/dragula@3.7.3/dist/dragula.min.js"></script>
+<head>
+    {% block head %}
+    <!-- <script src="/javascript/jquery-3.6.0.min.js"></script> -->
+
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/dragula@3.7.3/dist/dragula.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/dragula@3.7.3/dist/dragula.min.css" rel="stylesheet"> -->
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
-        <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-        <!-- JavaScript Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="static/css/alert.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="static/css/alert.css" type="text/css" />
 
-        <!-- Javascript for math styling -->
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Javascript for math styling -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-        <!-- For radical styling -->
-        <script defer src="//unpkg.com/mathlive"></script>
+    <!-- For radical styling -->
+    <script defer src="//unpkg.com/mathlive"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
 
+    <!-- Entire bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.17/dist/interact.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/interactjs@1.10.17/dist/api/styles/jsdoc-default.min.css"
+        rel="stylesheet" />
 
+    <script src="static/javascript/javascript.js"></script>
+    <script src="static/javascript/drag-drop.js"></script>
+    <script src="static/javascript/alert.js"></script>
+    <!-- <script src="/javascript/drag.js"></script> -->
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: "#da373d",
+                    },
+                },
+            },
+        };
+    </script>
 
-        <!-- Entire bundle -->
-        <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.17/dist/interact.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/interactjs@1.10.17/dist/api/styles/jsdoc-default.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css" type="text/css" />
 
-        <script src="static/javascript/javascript.js"></script>
-        <script src="static/javascript/drag-drop.js"></script>
-        <script src="static/javascript/alert.js"></script>
-        <!-- <script src="/javascript/drag.js"></script> -->
-
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            clifford: '#da373d',
-                        }
-                    }
-                }
-            }
-        </script>
-
-
-        <link rel="stylesheet" href="static/css/style.css" type="text/css">
-
-        <!-- <script>
+    <!-- <script>
             const draggable = new Draggable.default(document.querySelectorAll('ul'), {
               draggable: 'li'
             });
         </script> -->
 
-        {% block extraheader %} {% endblock %}
-        <title>{% block title %}Tutor Builder{% endblock %}</title>
-        {% endblock %}
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <div class="alert-success block-message error ">
-                <ul class=flashes>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-        {% endwith %}
-      
-    </head>
-    <body>
+    {% block extraheader %} {% endblock %}
+    <title>{% block title %}Tutor Builder{% endblock %}</title>
+    {% endblock %} {% with messages = get_flashed_messages() %} {% if messages
+    %}
+    <div class="alert-success block-message error">
+        <ul class="flashes">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %} {% endwith %}
+</head>
 
-        <!-- Chatbot -->
-        <script src="//code.tidio.co/2r5mdmvoj7rznapn7qirm2cerhybdo6t.js" async></script>
+<body>
+    <!-- Chatbot -->
+    <script src="//code.tidio.co/2r5mdmvoj7rznapn7qirm2cerhybdo6t.js" async></script>
 
-        <!-- Buglog -->
-        <script>
-            (function(d, s) {
-            s = d.createElement('script');
-            s.src = 'https://api.buglog.io/website/17X99KQX3P/code';
+    <!-- Buglog -->
+    <script>
+        (function (d, s) {
+            s = d.createElement("script");
+            s.src = "https://api.buglog.io/website/17X99KQX3P/code";
             s.async = 1;
             d.head.appendChild(s);
-            })(document);
-        </script>
-        <!-- End Buglog -->
+        })(document);
+    </script>
+    <!-- End Buglog -->
 
-        
-        <!-- <div id="heading">
+    <!-- <div id="heading">
             <h1>{% block heading %}{% endblock %}</h1>
             </div> -->
-            <div id="nav">
-                {% block nav %}
-                <header class="p-3 bg-primary text-white">
-                    <div class="p-6" id="header_style">
-                        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start gap-3">
+    <div id="nav">
+        {% block nav %}
+        <header class="p-3 bg-primary text-white">
+            <div class="p-6" id="header_style">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start gap-3">
+                    <div class="text-end">
+                        <a href="{{ url_for('tutor_builder') }}"><button type="button"
+                                class="btn btn-outline-light me-2">
+                                GPT Interface Builder
+                            </button></a>
+                    </div>
 
-                            <div class="text-end">
-                                <a href="{{ url_for('tutor_builder') }}"><button type="button" class="btn btn-outline-light me-2">GPT Interface Builder</button></a>
-                            </div>
+                    <div class="text-end">
+                        <a href="{{ url_for('profile') }}"><button type="button" class="btn btn-outline-light me-2">
+                                Settings
+                            </button></a>
+                    </div>
 
 
-                            <div class="text-end">
-
-                                <a href="{{ url_for('my_tutors') }}"><button type="button" class="btn btn-outline-light me-2">My Interfaces</button></a>
-                                <!-- <button type="button" class="btn btn-outline-light me-2">My asdfasdf</button> -->
-                            </div>
-
-                            <div class="text-end">
-                                {% if(request.url_rule.rule == "/tutor_builder") %}
-                                <button type="button" class="btn btn-outline-light me-2" id="btn_myProfile">Settings</button>
-                                {% else %}
-                                <a href="{{ url_for('profile') }}"><button type="button" class="btn btn-outline-light me-2">Settings</button></a>
-                                {% endif %}
-                            </div>
-
-                            <div class="text-end">
-                            </div>
-                            <div class="modal fade" id="confirmModal" data-page="" data-modal-target="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                        <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        <h1 style="text-align: center;">Tutor Data will be removed! Please save tutor data!</h1>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button data-modal-hide="confirmModal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" id="btn_save_tutor_header">
-                                                    Save Tutor
-                                            </button>
-                                            <button type="button"
-                                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" id="btn_cancel">Cancel</button>
-                                        </div>
-                                    </div>
-                                </div>
-                               </div>
-                            <!-- <div id="modal fade" id="confimModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <!-- <div id="modal fade" id="confimModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative w-full  max-h-full" id="modal-width">
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                     <button type="button"
@@ -177,21 +150,15 @@
                                 </div>
                                 </div>
                             </div> -->
-                        </div>
-                    </div>
-                </header>
-                {% endblock %}
+                </div>
             </div>
+        </header>
+        {% endblock %}
+    </div>
 
-            <div id="content">{% block content %}{% endblock %}</div>
+    <div id="content">{% block content %}{% endblock %}</div>
 
-            <div id="footer">
-                {% block footer %}
-                {% endblock %}
-            </div>
-    </body>
+    <div id="footer">{% block footer %} {% endblock %}</div>
+</body>
+
 </html>
-
-
-
-
