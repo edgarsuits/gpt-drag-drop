@@ -182,7 +182,7 @@ $(document).ready(function (e) {
       },
       error: function (error) {
         console.error("Error generating tutor layout:", error);
-        alert("Failed to generate tutor layout.");
+        alert("Failed to generate tutor layout, ensure valid OpenAI key.");
         $("#loadingSpinner").hide();
       },
     });
@@ -226,8 +226,8 @@ $(document).ready(function (e) {
         $thisButton.closest(".component-item").find(".spinner-overlay").hide();
       },
       error: function (error) {
-        console.error("Error generating tutor layout:", error);
-        alert("Failed to generate tutor layout.");
+        console.error("Error generating component layout:", error);
+        alert("Failed to generate component layout, ensure valid OpenAI key.");
         $thisButton.closest(".component-item").find(".spinner-overlay").hide();
       },
     });
