@@ -138,7 +138,7 @@ def generate_component_layout():
 
     # Combining all the parts to form the complete prompt
     prompt = f"\n{prompt_introduction}\n\n{prompt_format}\n\n{prompt_design_instructions}\n\n{prompt_examples}\n\n{prompt_task}"
-    instruction = f"\nDetailed Description:\n{detailed_description}\n"
+    instruction = f"\nYou always MUST GENERATE A LAYOUT CORRECTLY FORMATTED EVEN IF THE DESCRIPTION IS UNDER SPECIFIED!!! Description:\n{detailed_description}\n"
     # Format the prompt with the detailed description from the request
     #prompt = f"""Given a detailed description of a tutor interface, generate a compact representation layout string in a specific format. The format includes titles, rows, columns, labels, and inputs, represented as follows: title[Title], row {{ ... }}, column {{ ... }}, label[Label], and input[Placeholder]. Elements inside rows and columns should be enclosed in curly braces {{}}, and element attributes should be enclosed in square brackets []. Ensure the output is precise and adheres to this structure for easy parsing.
     #Design instructions: Given that the intelligent tutor will utilize an AI algorithm to learn from the teacher interaction what the problem solution is; each input element should be separate, for example in an equation there should be one input element per digit. Respect design principles; for example, a single equation must be in a single line. 
