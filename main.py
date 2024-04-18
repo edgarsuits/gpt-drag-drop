@@ -54,7 +54,7 @@ def get_prompt():
         return file.read().strip()
 
 # Usage
-openai.api_key = get_openai_key()
+openai.api_key = os.getenv('OPENAI_API_KEY')
 input_prompt = get_prompt()
 
 
