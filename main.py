@@ -54,42 +54,9 @@ def get_prompt():
         return file.read().strip()
 
 # Usage
-openai.api_key = get_openai_key()
+openai.api_key = os.getenv('OPENAI_API_KEY')
 input_prompt = get_prompt()
 
-def get_db_connection():
-    conn = sqlite3.connect('database.db')
-    conn.row_factory = sqlite3.Row
-    return conn
-
-def import_data_from_dump(dump_file_path, database_path, table_name):
-    """
-    Imports data from a text dump into a specified table in the database.
-    
-    :param dump_file_path: The path to the text dump file.
-    :param database_path: The path to the SQLite database file.
-    :param table_name: The name of the table to insert the data into.
-    """
-    # Connect to the database
-    conn = sqlite3.connect(database_path)
-    cur = conn.cursor()
-    
-    with open(dump_file_path, newline='', encoding='utf-8') as file:
-        # Assuming the file uses CSV format and is properly escaped/quoted
-        reader = csv.DictReader(file)
-        for row in reader:
-            print(row['name'])
-            # Prepare data tuple
-            data = (row['id'], row['name'], row['content'], row['IsOnline'], row['follows'], row['agent_id'])
-            # Insert data into the database
-            cur.execute(f'''
-            INSERT INTO {table_name} (id, name, content, IsOnline, follows, agent_id) 
-            VALUES (?, ?, ?, ?, ?, ?)
-            ''', data)
-    
-    # Commit changes and close the connection
-    conn.commit()
-    conn.close()
 
 
 @app.route("/")
@@ -109,28 +76,13 @@ def index():
 
 
 
-    
-
-@app.route("/edit", methods=["GET", 'POST'])
-def edit():
-    return render_template("edit.html")
-
-
-@app.route("/preview", methods=["GET", 'POST'])
-def preview():
-    return render_template("preview.html")
-
 
 
 
 @app.route("/tutor_builder", methods=["GET", 'POST'])
 def tutor_builder():
-    conn = get_db_connection()
 
-    tutors = conn.execute('SELECT * FROM tutors').fetchall()
-
-    conn.close()
-    return render_template("tutor_builder.html", tutors=tutors)
+    return render_template("tutor_builder.html")
 
 
 
@@ -148,50 +100,20 @@ def profile():
         pass  # It's okay if the file doesn't exist; treat as if no key has been saved yet.
 
     if request.method == 'POST':
-        openai_key = request.form['api_key']  # Assuming the input for the key has name='first_name'
+        api_key_value = request.form['api_key']  # Assuming the input for the key has name='first_name'
 
         # Save the key to a file
         with open('openai_key.txt', 'w') as file:
-            file.write(openai_key)
+            file.write(api_key_value)
+
+        openai.api_key = api_key_value
+        api_key_exists = True
 
         # Redirect or respond accordingly after sav
     
     # # print("************* : ", data.first_name)
     return render_template("profile.html",  api_key_value=api_key_value, api_key_exists=api_key_exists)
 
-
-@app.route("/my_tutors", methods=["GET", 'POST'])
-def my_tutors():
-
-    conn = get_db_connection()
-    tutors = conn.execute(f"SELECT id, name FROM tutors ").fetchall()
-    conn.close()
-
-    return render_template("my_tutors.html", tutors=tutors)
-
-
-#Update_tutor_content
-@app.route("/update_tutor_content", methods=['POST'])
-def update_tutor_content():
-
-    request_data = request.get_json()
-
-    content = request_data['content']
-
-    tutorName = request_data['tutorName']
-
-    conn = get_db_connection()
-
-    conn.execute(
-        'UPDATE tutors SET content=? WHERE tutor_name=?', (content, tutorName))
-
-    conn.commit()
-
-    toReturn = {"return": "True"}
-
-    conn.close()
-
-    return jsonify(toReturn)
 
 @app.route('/generateComponentLayout', methods=['POST'])
 def generate_component_layout():
@@ -216,7 +138,7 @@ def generate_component_layout():
 
     # Combining all the parts to form the complete prompt
     prompt = f"\n{prompt_introduction}\n\n{prompt_format}\n\n{prompt_design_instructions}\n\n{prompt_examples}\n\n{prompt_task}"
-    instruction = f"\nDetailed Description:\n{detailed_description}\n"
+    instruction = f"\nYou always MUST GENERATE A LAYOUT CORRECTLY FORMATTED EVEN IF THE DESCRIPTION IS UNDER SPECIFIED!!! Description:\n{detailed_description}\n"
     # Format the prompt with the detailed description from the request
     #prompt = f"""Given a detailed description of a tutor interface, generate a compact representation layout string in a specific format. The format includes titles, rows, columns, labels, and inputs, represented as follows: title[Title], row {{ ... }}, column {{ ... }}, label[Label], and input[Placeholder]. Elements inside rows and columns should be enclosed in curly braces {{}}, and element attributes should be enclosed in square brackets []. Ensure the output is precise and adheres to this structure for easy parsing.
     #Design instructions: Given that the intelligent tutor will utilize an AI algorithm to learn from the teacher interaction what the problem solution is; each input element should be separate, for example in an equation there should be one input element per digit. Respect design principles; for example, a single equation must be in a single line. 
@@ -234,7 +156,7 @@ def generate_component_layout():
         # Return the compact layout generated by OpenAI
         return jsonify({"compactLayout": generated_text})
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": "Instert Valid OpenAI key"}), 500
     
 
 @app.route('/generateTutorLayout', methods=['POST'])
@@ -291,129 +213,8 @@ def generate_tutor_layout():
         return jsonify({"error": str(e)}), 500
     
 
-@app.route("/update_tutor_online", methods=['POST'])
-def update_tutor_online():
-
-    request_data = request.get_json()
-
-    IsOnline = request_data['IsOnline']
-
-    id = request_data['id']
-
-    conn = get_db_connection()
-
-    conn.execute(
-        'UPDATE tutors SET IsOnline=? WHERE id=?', (IsOnline, id))
-
-    conn.commit()
-
-    toReturn = {"return": "True"}
-
-    conn.close()
-
-    return jsonify(toReturn)
 
 
-@app.route("/update_tutor_follow_online", methods=['POST'])
-def update_tutor_follow_online():
-
-    request_data = request.get_json()
-
-    follows = request_data['follows']
-
-    id = request_data['id']
-
-    conn = get_db_connection()
-
-    conn.execute(
-        'UPDATE tutors SET follows=? WHERE id=?', (follows, id))
-
-    conn.commit()
-
-    toReturn = {"return": "True"}
-
-    conn.close()
-
-    return jsonify(toReturn)
-
-
-
-# Rename
-@app.route("/rename", methods=['POST'])
-def rename():
-    # print("This is tutor_rename function!!!!!!")
-
-    request_data = request.get_json()
-
-    Id = request_data['Id']
-
-    tutorName = request_data['tutorName']
-
-    # print(Id, tutorName)
-
-    conn = get_db_connection()
-
-    conn.execute(
-        'UPDATE tutors SET tutor_name=? WHERE id=?', (tutorName, Id))
-
-    conn.commit()
-
-    toReturn = {"return": "True"}
-
-    conn.close()
-
-    return jsonify(toReturn)
-
-
-
-
-# Delete
-@app.route("/delete", methods=['POST'])
-def delete():
-    # print("This is tutor_delete function!!!!!!")
-
-    request_data = request.get_json()
-    print(request_data)
-
-    Id = request_data['id']
-
-    conn = get_db_connection()
-
-    conn.execute(
-        'DELETE FROM tutors WHERE id=?', (Id,))
-    conn.commit()
-
-    toReturn = {"return": "True"}
-
-    conn.close()
-    return jsonify(toReturn)
-
-
-# Edit
-@app.route("/tutor_edit", methods=["GET", 'POST'])
-def tutor_edit():
-
-    tutor_id = request.get_json()['Id']
-    content = tutor.get_tutor(tutor_id)["content"]
-
-    return jsonify({"tutor": content, "tutor_id": tutor_id})
-
-
-# Edit
-@app.route("/tutor_preview", methods=["GET", 'POST'])
-def tutor_preview():
-
-    tutor_id = request.get_json()['Id']
-    content = tutor.get_tutor(tutor_id)["content"]
-
-    return jsonify({"tutor": content, "tutor_id": tutor_id})
-
-# Save
-@app.route("/save", methods=['POST'])
-def save():
-
-    tutor.save(request.get_json())
-    return jsonify({"return": "True"})
 
 
 
@@ -422,12 +223,6 @@ def save():
 ###################################################
 
 if __name__ == "__main__":
-    database.setup(loads(open("config.json", "r").read()))
-    imported = True
-    if os.path.exists("tutors_dump.txt") and not imported:
-        print("Dump file found. Importing data...")
-        import_data_from_dump("tutors_dump.txt", "database.db", "tutors")
-        print("Data imported successfully.")
     app.run()
 
 
